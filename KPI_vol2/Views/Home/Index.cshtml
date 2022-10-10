@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+@*<a asp-controller="Administrator" asp-action="CreateRole" class="btn btn-primary">Dodaj uprawnienia</a>*@
+<a asp-controller="Administrator" asp-action="ListRoles" class="btn btn-primary">Lista uprawnień</a>
+@*<a asp-controller="Uzytkownik" asp-action="Index" class="btn btn-primary">Uzytkownicy</a>*@
+<a asp-controller="Administrator" asp-action="ListOfUsers" class="btn btn-primary">Użytkownicy aplikacji</a>
