@@ -1,0 +1,23 @@
+﻿@model CreateRoleVM
+
+@{
+    ViewBag.Title = "Dodawanie uprawnień";
+}
+
+<h1>Dodaj uprawnienia</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RoleName">Nazwa</label>
+                <input asp-for="RoleName" class="form-control" />
+                <span asp-validation-for="RoleName" class="text-danger"></span>
+            </div>
+            
+           <br />
+            <button type="submit" class="btn btn-primary">Dodaj uprawnienia</button>
+        </form>
+    </div>
+</div>
