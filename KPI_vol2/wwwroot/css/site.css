@@ -16,3 +16,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+@media (min-width: 100%) {
+    .container {
+        max-width: 100%;
+    }
+}

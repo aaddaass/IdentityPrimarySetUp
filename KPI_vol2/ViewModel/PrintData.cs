@@ -11,5 +11,7 @@ namespace KPI_vol2.ViewModel
         public string   Wykonanie { get;set;} 
         public bool     IsSelected { get;set; }
         public string   OsobaPilotujaca { get;set; }
+
+        public DayOfWeek DayOfWeek { get;set; }
     }
 }

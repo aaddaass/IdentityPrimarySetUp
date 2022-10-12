@@ -6,7 +6,7 @@
                 <div class="row row-cols " style=" border:black">
                     @for(var i = 1; i <= ViewBag.array; i++)
                 {
-                        <div id="@i"class ="col bg-light m-1 rounded-1 w-25 h-50">@i</div>
+                        <div id="@i"class ="col bg-light m-1 rounded-1 w-25 h-50">@i @ViewBag.week</div>
                 }
                 </div>
             </div>
@@ -15,4 +15,12 @@
     <div id="RealizacjaZadan"></div>
     <div id="wykres"></div>
     <div></div>
+</div>
+
+<div>@*
+    @Html.EJS().Calendar("calendar").Render()*@
+
+    <a asp-controller="Zdarzenias" asp-action="index" class="btn btn-primary">Zdarzenia</a>
+
+    <ejs-calendar id="calendar"></ejs-calendar>
 </div>

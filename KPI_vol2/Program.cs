@@ -22,6 +22,7 @@ builder.Services.AddRazorPages();
 
 //wstrzykiwanie zale¿noœci DI
 builder.Services.AddScoped<IUzytkownik, RepoUzytkownik>();
+builder.Services.AddScoped<IZdarzenie, RepoZdarzenia>();
 
 var app = builder.Build();
 

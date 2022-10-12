@@ -11,6 +11,9 @@
    
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/KPI_vol2.styles.css" asp-append-version="true" />
+
+   @* <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/19.4.52/fluent.css" />*@
+    <script src="https://cdn.syncfusion.com/ej2/19.4.52/dist/ej2.min.js"></script>
 </head>
 <body>
     <header>
@@ -35,7 +38,7 @@
                                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Administracja</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" asp-action="ListRoles" asp-controller="Administrator">Uprawnienia</a></li>
-                                    <li><a class="dropdown-item" asp-action="ListOfUsers" asp-controller="">Użytkownicy</a></li>
+                                    <li><a class="dropdown-item" asp-action="ListOfUsers" asp-controller="Administrator">Użytkownicy</a></li>
                                     
                                 </ul>
                             </li>
@@ -49,7 +52,7 @@
             </div>
         </nav>
     </header>
-    <div @*class="container"*@>
+    <div class="container ">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
