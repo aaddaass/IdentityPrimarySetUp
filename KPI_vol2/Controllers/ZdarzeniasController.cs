@@ -83,7 +83,7 @@ namespace KPI_vol2.Controllers
                     
              
             }
-            return View(zdarzenia);
+            return RedirectToAction("details", new {id=zdarzenia.Id});
         }
 
         // GET: Zdarzenias/Delete/5

@@ -2,14 +2,14 @@
     <div id="wypadki">
         <div id="calendar " >
             
-            <div class="container-fluid text-center  p-5">
+            @*<div class="container-fluid text-center  p-5">*@
                 <div class="row row-cols " style=" border:black">
                     @for(var i = 1; i <= ViewBag.array; i++)
                 {
-                        <div id="@i"class ="col bg-light m-1 rounded-1 w-25 h-50">@i @ViewBag.week</div>
+                        <div id="@i" class="col  m-1 rounded-1 w-25 h-50" onclick="changeStyle()">@i @ViewBag.week</div>
                 }
                 </div>
-            </div>
+            @*</div>*@
         </div>
     </div>
     <div id="RealizacjaZadan"></div>
@@ -22,5 +22,34 @@
 
     <a asp-controller="Zdarzenias" asp-action="index" class="btn btn-primary">Zdarzenia</a>
 
-    <ejs-calendar id="calendar"></ejs-calendar>
+    <div id="datetime"></div>
 </div>
+<script type="text/javascript">
+    
+
+    var year = Date.year();
+    var month = Date.month();
+    var day = Date.daysInMonth(month, year);
+    for (let i = 1; i <= day.length; i++) {
+
+        var element = document.getElementById(i);
+        element.style.backgroundColor = "#f5425a";
+    }
+
+    document.getElementById("datetime").innerHTML = dt.toLocaleDateString();
+
+    function changeStyle() {
+
+        var year = Date.year();
+        var month = Date.month();
+
+        var day = Date.daysInMonth(month, year);
+
+        for (let i = 1; i <= day.length; i++) {
+
+            var element = document.getElementById(i);
+            element.style.backgroundColor = "#f5425a";
+        }
+        
+    }
+</script>

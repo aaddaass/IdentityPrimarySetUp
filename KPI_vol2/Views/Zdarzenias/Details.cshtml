@@ -1,17 +1,17 @@
 ﻿@model KPI_vol2.Models.Zdarzenia
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Szczegóły zdarzenia";
 }
 
-<h1>Details</h1>
+
 
 <div>
-    <h4>Zdarzenia</h4>
+    <h2>Szczegóły zdarzenia</h2>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+            Nazwa zdarzenia
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Name)
@@ -23,25 +23,25 @@
             @Html.DisplayFor(model => model.Opis)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Naprawa)
+            Sposób naprawy
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Naprawa)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataZdarzenia)
+            Data zdarzenia
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.DataZdarzenia)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataWykonania)
+            Data wykonania
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.DataWykonania)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OsobaOdpowiedzialna)
+            Osoba odpowiedzialna
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.OsobaOdpowiedzialna)
@@ -49,6 +49,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edycja</a> |
+    <a asp-action="Index">Powrót do listy</a>
 </div>
