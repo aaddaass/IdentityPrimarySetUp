@@ -7,41 +7,43 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KPI_vol2.Data;
 using KPI_vol2.Models;
+using KPI_vol2.Interface;
+using System.Data;
+using KPI_vol2.ViewModel;
 
 namespace KPI_vol2.Controllers
 {
     public class StatusController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IStatus _status;
 
-        public StatusController(ApplicationDbContext context)
+        public StatusController(IStatus status)
         {
-            _context = context;
+            _status=status;
         }
 
         // GET: Status
-        public async Task<IActionResult> Index()
+        public ViewResult Index()
         {
-              return View(await _context.Status.ToListAsync());
+              return View(_status.GetAll());
         }
 
         // GET: Status/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Status == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> Details(int id)
+        //{
+        //    Status status = _status.GetStatus(id); 
+        //    if(status == null)
+        //    {
+        //        Response.StatusCode = 404;
+        //        return View("UserNotFound",id);
+        //    }
 
-            var status = await _context.Status
-                .FirstOrDefaultAsync(m => m.IdStatus == id);
-            if (status == null)
-            {
-                return NotFound();
-            }
-
-            return View(status);
-        }
+        //    Status statusVM = new Status()
+        //    {
+        //        Name= status.Name,
+        //    };
+        //    return View(statusVM);
+        //}
 
         // GET: Status/Create
         public IActionResult Create()
@@ -54,31 +56,30 @@ namespace KPI_vol2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdStatus,Name")] Status status)
+        public IActionResult Create( StatusVM status)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(status);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return View();
             }
-            return View(status);
+            Status newstatus = new Status
+            {
+                Name = status.Name,
+            };
+            _status.AddStatus(newstatus);
+            return RedirectToAction("Index");
         }
 
         // GET: Status/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null || _context.Status == null)
+           Status status=_status.GetStatus(id);
+            StatusVM statusEdit = new StatusVM
             {
-                return NotFound();
-            }
-
-            var status = await _context.Status.FindAsync(id);
-            if (status == null)
-            {
-                return NotFound();
-            }
-            return View(status);
+                IdStatus=status.IdStatus,
+                Name = status.Name,
+            };
+            return View(statusEdit);
         }
 
         // POST: Status/Edit/5
@@ -86,51 +87,25 @@ namespace KPI_vol2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdStatus,Name")] Status status)
+        public IActionResult Edit(StatusVM statusVM)
         {
-            if (id != status.IdStatus)
+          if(ModelState.IsValid)
             {
-                return NotFound();
-            }
+                Status status=_status.GetStatus(statusVM.IdStatus);
+                status.Name = statusVM.Name;
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(status);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!StatusExists(status.IdStatus))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                _status.UpdateStatus(status);
+                return RedirectToAction("Index");
             }
-            return View(status);
+            return View();
+          
         }
 
         // GET: Status/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || _context.Status == null)
-            {
-                return NotFound();
-            }
-
-            var status = await _context.Status
-                .FirstOrDefaultAsync(m => m.IdStatus == id);
-            if (status == null)
-            {
-                return NotFound();
-            }
-
+          
+            var status = _status.GetStatus(id);
             return View(status);
         }
 
@@ -139,23 +114,19 @@ namespace KPI_vol2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Status == null)
+            try
             {
-                return Problem("Entity set 'ApplicationDbContext.Status'  is null.");
+                Status status = _status.GetStatus(id);
+               _status.DeleteStatus(id);
             }
-            var status = await _context.Status.FindAsync(id);
-            if (status != null)
+            catch (DataException /* dex */)
             {
-                _context.Status.Remove(status);
+                //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
 
-        private bool StatusExists(int id)
-        {
-          return _context.Status.Any(e => e.IdStatus == id);
-        }
+       
     }
 }

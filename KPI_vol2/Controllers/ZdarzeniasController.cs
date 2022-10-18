@@ -14,10 +14,12 @@ namespace KPI_vol2.Controllers
     public class ZdarzeniasController : Controller
     {
         private readonly IZdarzenie _zdarzenie;
+        private readonly IStatus _status;
 
-        public ZdarzeniasController(IZdarzenie zdarzenie)
+        public ZdarzeniasController(IZdarzenie zdarzenie, IStatus status)
         {
-            _zdarzenie=zdarzenie;
+            _zdarzenie = zdarzenie;
+            _status = status;
         }
 
         // GET: Zdarzenias
@@ -42,6 +44,8 @@ namespace KPI_vol2.Controllers
         // GET: Zdarzenias/Create
         public IActionResult Create()
         {
+            
+            ViewBag.StatusList = new SelectList(_status.GetAll(), "IdStatus", "Name");
             return View();
         }
 
@@ -52,8 +56,10 @@ namespace KPI_vol2.Controllers
         [ValidateAntiForgeryToken]
         public RedirectToActionResult Create(Zdarzenia zdarzenia)
         {
-           
-                Zdarzenia newzdarzenie=_zdarzenie.AddZdarzenie(zdarzenia);
+            
+            ViewBag.StatusList = new SelectList(_status.GetAll(), "IdStatus", "Name");
+
+            Zdarzenia newzdarzenie=_zdarzenie.AddZdarzenie(zdarzenia);
                 
                 return RedirectToAction("details",new {id=newzdarzenie.Id});
             

@@ -9,5 +9,7 @@ namespace KPI_vol2.Interface
         Status AddStatus(Status Status);
         Status UpdateStatus(Status Status);
         Status DeleteStatus(int id);
+
+
     }
 }
