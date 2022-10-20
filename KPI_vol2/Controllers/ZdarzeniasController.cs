@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using KPI_vol2.Data;
 using KPI_vol2.Models;
 using KPI_vol2.Interface;
+using KPI_vol2.ViewModel;
 
 namespace KPI_vol2.Controllers
 {
@@ -29,16 +30,20 @@ namespace KPI_vol2.Controllers
         }
 
         // GET: Zdarzenias/Details/5
-        public async Task<IActionResult> Details(int id)
+        public ViewResult Details(int? id)
         {
-            Zdarzenia zdarzenia=_zdarzenie.GetZdarzenia(id);
+            Zdarzenia zdarzenia=_zdarzenie.GetZdarzenia(id.Value);
             if (id == null)
             {
                 Response.StatusCode = 404;
                 return View("UserNotFound",id);
             }
+            ZdarzeniaDetailsVM zdarzenieVM = new ZdarzeniaDetailsVM()
+            {
+                ZdarzeniaDet = zdarzenia
+            };
 
-           return View(zdarzenia);
+           return View(zdarzenieVM);
         }
 
         // GET: Zdarzenias/Create
@@ -46,6 +51,7 @@ namespace KPI_vol2.Controllers
         {
             
             ViewBag.StatusList = new SelectList(_status.GetAll(), "IdStatus", "Name");
+            
             return View();
         }
 
@@ -54,14 +60,25 @@ namespace KPI_vol2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public RedirectToActionResult Create(Zdarzenia zdarzenia)
+        public IActionResult Create(ZdarzenieVM zdarzeniaVM)
         {
             
-            ViewBag.StatusList = new SelectList(_status.GetAll(), "IdStatus", "Name");
-
-            Zdarzenia newzdarzenie=_zdarzenie.AddZdarzenie(zdarzenia);
-                
-                return RedirectToAction("details",new {id=newzdarzenie.Id});
+          if(ModelState.IsValid)
+            {
+                Zdarzenia noweZdarzenie = new Zdarzenia
+                {
+                    Name                = zdarzeniaVM.Name,
+                    Opis                = zdarzeniaVM.Opis,
+                    Naprawa             = zdarzeniaVM.Naprawa,
+                    DataZdarzenia       = DateTime.Now,
+                    DataWykonania       = zdarzeniaVM.DataWykonania,
+                    OsobaOdpowiedzialna = zdarzeniaVM.OsobaOdpowiedzialna,
+                    IdStatus            = zdarzeniaVM.IdStatus,
+                };
+                _zdarzenie.AddZdarzenie(noweZdarzenie);
+                return RedirectToAction("details",new {id=noweZdarzenie.Id});
+            }
+          return View();
             
             
         }
@@ -69,8 +86,21 @@ namespace KPI_vol2.Controllers
         // GET: Zdarzenias/Edit/5
         public ViewResult Edit(int id)
         {
+            ViewBag.StatusList = new SelectList(_status.GetAll(), "IdStatus", "Name");
             Zdarzenia zdarzenia = _zdarzenie.GetZdarzenia(id);
-            return View(zdarzenia);
+
+            ZdarzenieVM zdarzenieVM = new ZdarzenieVM
+            {
+                Name = zdarzenia.Name,
+                Opis = zdarzenia.Opis,
+                Naprawa = zdarzenia.Naprawa,
+                DataZdarzenia = zdarzenia.DataZdarzenia,
+                DataWykonania = zdarzenia.DataWykonania,
+                OsobaOdpowiedzialna = zdarzenia.OsobaOdpowiedzialna,
+                IdStatus = zdarzenia.IdStatus
+            };
+            return View();
+
         }
 
         // POST: Zdarzenias/Edit/5
@@ -78,18 +108,25 @@ namespace KPI_vol2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit( Zdarzenia zdarzenia)
+        public IActionResult Edit( ZdarzenieVM zdarzeniaVM)
         {
            
 
             if (ModelState.IsValid)
             {
-               
-                    _zdarzenie.UpdateZdarzenie(zdarzenia);
-                    
-             
+                  Zdarzenia zdarzenia=_zdarzenie.GetZdarzenia(zdarzeniaVM.Id);
+                zdarzenia.Name                  = zdarzeniaVM.Name;
+                zdarzenia.Opis                  = zdarzeniaVM.Opis;
+                zdarzenia.Naprawa               = zdarzeniaVM.Naprawa;
+                zdarzenia.DataZdarzenia         = zdarzeniaVM.DataZdarzenia;
+                zdarzenia.DataWykonania         = zdarzeniaVM.DataWykonania;
+                zdarzenia.OsobaOdpowiedzialna   = zdarzeniaVM.OsobaOdpowiedzialna;
+                zdarzenia.IdStatus              = zdarzeniaVM.IdStatus;
+
+                _zdarzenie.UpdateZdarzenie(zdarzenia);
+                return RedirectToAction("index");
             }
-            return RedirectToAction("details", new {id=zdarzenia.Id});
+            return View();
         }
 
         // GET: Zdarzenias/Delete/5

@@ -1,4 +1,4 @@
-﻿@model KPI_vol2.Models.Zdarzenia
+﻿@model ZdarzeniaDetailsVM
 
 @{
     ViewData["Title"] = "Szczegóły zdarzenia";
@@ -45,6 +45,12 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.OsobaOdpowiedzialna)
+        </dd>
+        <dt class="col-sm-2">
+            Status
+        </dt>
+        <dd class="col-sm-10">
+           @Html.DisplayFor(model=>model.Status.Name)
         </dd>
     </dl>
 </div>

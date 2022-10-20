@@ -1,6 +1,7 @@
 ﻿using KPI_vol2.Data;
 using KPI_vol2.Interface;
 using KPI_vol2.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace KPI_vol2.Repository
 {
@@ -32,12 +33,20 @@ namespace KPI_vol2.Repository
 
         public IEnumerable<Zdarzenia> GetAll()
         {
-            return _context.Zdarzenia;
+            var zdarzenie = _context.Zdarzenia
+                            .Include(s => s.CurentStatus)
+                            .OrderByDescending(d => d.DataZdarzenia)
+                            .AsNoTracking();
+            return zdarzenie;
+           
         }
 
         public Zdarzenia GetZdarzenia(int id)
         {
-            return _context.Zdarzenia.Find(id);
+            var zdarzenie = _context.Zdarzenia
+                .Include(_ => _.CurentStatus)
+                .FirstOrDefault(m=>m.Id == id);
+            return zdarzenie;
         }
 
         public Zdarzenia UpdateZdarzenie(Zdarzenia zdarzenie)

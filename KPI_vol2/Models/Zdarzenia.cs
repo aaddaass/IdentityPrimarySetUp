@@ -19,7 +19,7 @@ namespace KPI_vol2.Models
         public string OsobaOdpowiedzialna { get;set; }
 
         public int IdStatus { get; set; }   
-        public  Status Status  { get; set; }
+        public  Status CurentStatus { get; set; }
 
     }
 }

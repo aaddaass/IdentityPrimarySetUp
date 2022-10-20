@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using KPI_vol2.ViewModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace KPI_vol2.Models
 {

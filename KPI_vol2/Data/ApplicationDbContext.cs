@@ -13,9 +13,9 @@ namespace KPI_vol2.Data
         {
         }
 
-        public  virtual DbSet <Uzytkownik> Uzytkowniks { get; set; }
-        public  virtual DbSet <Zdarzenia> Zdarzenia { get; set; }
-        public  virtual DbSet <Status> Status { get; set; }
+        public   DbSet <Uzytkownik> Uzytkowniks { get; set; }
+        public    DbSet <Zdarzenia> Zdarzenia { get; set; }
+        public   DbSet <Status> Status { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -28,6 +28,17 @@ namespace KPI_vol2.Data
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
             // zablokowanie usuwania powizanych danych
+
+            builder.Entity<Status>()
+                .HasMany(z => z.Zdarzenia)
+                .WithOne(s => s.CurentStatus);
+            builder.Entity<Zdarzenia>()
+                .HasOne(s => s.CurentStatus)
+                .WithMany(z => z.Zdarzenia);
+            
+                
+                
+
 
            
                    

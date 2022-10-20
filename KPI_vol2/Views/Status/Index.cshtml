@@ -1,19 +1,19 @@
 ﻿@model IEnumerable<KPI_vol2.Models.Status>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Status";
 }
 
-<h1>Index</h1>
+<h1>Lista wartości statusu zdarzenia</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Dodaj nowa wartość</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Nazwa
             </th>
             <th></th>
         </tr>
@@ -25,9 +25,26 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdStatus">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdStatus">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdStatus">Delete</a>
+                    <form method="post" asp-action="Delete" asp-route-id="@item.IdStatus">
+                        <a asp-controller="Status" asp-action="Edit"
+                       asp-route-id="@item.IdStatus" class="btn btn-primary">Edycja</a>
+
+                        <span id="confirmDeleteSpan_@item.IdStatus" style="display:none">
+                            <span>Czy na pewno chcesz usunąć wartość?</span>
+                            <button type="submit" class="btn btn-danger">Tak</button>
+                            <a href="#" class="btn btn-primary"
+                           onclick="confirmDelete('@item.IdStatus', false)">Nie</a>
+                        </span>
+
+                        <span id="deleteSpan_@item.IdStatus">
+                            <a href="#" class="btn btn-danger"
+                           onclick="confirmDelete('@item.IdStatus', true)">Usuń</a>
+                        </span>
+                    </form>
+
+               @* <a asp-action="Edit" asp-route-id="@item.IdStatus">Edycja</a> |
+                @*<a asp-action="Details" asp-route-id="@item.IdStatus">Details</a> |*@
+               @* <a asp-action="Delete" asp-route-id="@item.IdStatus">Usuń</a>*@
             </td>
         </tr>
 }
