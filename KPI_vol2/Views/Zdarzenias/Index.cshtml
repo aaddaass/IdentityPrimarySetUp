@@ -1,0 +1,59 @@
+﻿@model IEnumerable<KPI_vol2.Models.Zdarzenia>
+
+@{
+    ViewData["Title"] = "Zdarzenia";
+}
+
+<h1>Lista zdarzeń</h1>
+
+<p>
+    <a asp-action="Create">Dodaj nowe zdarzenie</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Tytuł zdarzenia
+            </th>          
+            <th>
+                Data zdarzenia
+            </th>
+            <th>
+                Data wykonania
+            </th>
+            <th>
+                Osoba odpowiedzialna
+            </th>
+           @* <th>
+                @Html.DisplayNameFor(model => model.OsobaOdpowiedzialna)   zmiana na status
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>                      
+            <td>
+                @Html.DisplayFor(modelItem => item.DataZdarzenia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataWykonania)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OsobaOdpowiedzialna)
+            </td>
+                @* <th>
+            @Html.DisplayNameFor(model => model.OsobaOdpowiedzialna)   zmiana na status
+            </th>*@
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edycja</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

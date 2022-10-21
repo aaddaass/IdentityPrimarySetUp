@@ -14,6 +14,7 @@ namespace KPI_vol2.Data
         }
 
         public virtual DbSet <Uzytkownik> Uzytkowniks { get; set; }
+        public virtual DbSet <Zdarzenia> Zdarzenia { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

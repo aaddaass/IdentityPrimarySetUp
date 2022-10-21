@@ -54,25 +54,25 @@ namespace KPI_vol2.Controllers
 
                 // If user is successfully created, sign-in the user using
                 // SignInManager and redirect to index action of HomeController
-                if (result.Succeeded)
-                {
-                    var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                //if (result.Succeeded)
+                //{
+                //    var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                    var confirmLink = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, token = token },Request.Scheme);
+                //    var confirmLink = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, token = token },Request.Scheme);
 
-                    logger.Log(LogLevel.Warning, confirmLink);
+                //    logger.Log(LogLevel.Warning, confirmLink);
 
-                    if(signInManager.IsSignedIn(User)&& User.IsInRole("Admin"))
-                    {
-                        return RedirectToAction("ListOfUsers", "Administrator");
-                    }
+                //    if(signInManager.IsSignedIn(User)&& User.IsInRole("Admin"))
+                //    {
+                //        return RedirectToAction("ListOfUsers", "Administrator");
+                //    }
 
-                    ViewBag.ErrorTitle = "Rejestracja przebiegła pomyślnie";
-                    ViewBag.ErrorMessage = "Zanim sie zalogujesz prosze potwierdź swój adres email.";
+                //    ViewBag.ErrorTitle = "Rejestracja przebiegła pomyślnie";
+                //    ViewBag.ErrorMessage = "Zanim sie zalogujesz prosze potwierdź swój adres email.";
 
-                    //await signInManager.SignInAsync(user, isPersistent: false);
-                    //return RedirectToAction("index", "home");
-                }
+                //    //await signInManager.SignInAsync(user, isPersistent: false);
+                //    //return RedirectToAction("index", "home");
+                //}
 
                 // If there are any errors, add them to the ModelState object
                 // which will be displayed by the validation summary tag helper
