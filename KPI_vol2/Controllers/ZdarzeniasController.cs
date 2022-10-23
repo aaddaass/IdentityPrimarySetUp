@@ -41,7 +41,7 @@ namespace KPI_vol2.Controllers
 
             ZdarzenieVM zdarzenieVM = new ZdarzenieVM()
             {
-                Id = id,
+                Id                  = id,
                 Name                = zdarzenia.Name,
                 Opis                = zdarzenia.Opis,
                 Naprawa             = zdarzenia.Naprawa,
