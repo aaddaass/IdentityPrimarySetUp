@@ -10,16 +10,19 @@ using KPI_vol2.Models;
 using KPI_vol2.Interface;
 using KPI_vol2.ViewModel;
 using System.Xml.Linq;
+using System.Net.NetworkInformation;
 
 namespace KPI_vol2.Controllers
 {
     public class ZdarzeniasController : Controller
     {
         private readonly IZdarzenia _zdarzenia;
+        private readonly IStatus _status;
 
-        public ZdarzeniasController(IZdarzenia zdarzenia)
+        public ZdarzeniasController(IZdarzenia zdarzenia, IStatus status)
         {
-            _zdarzenia=zdarzenia;
+            _zdarzenia = zdarzenia;
+            _status = status;
         }
 
         // GET: Zdarzenias
@@ -33,21 +36,23 @@ namespace KPI_vol2.Controllers
         public ViewResult Details(int id)
         {
             Zdarzenia zdarzenia = _zdarzenia.GetZdarzenia(id);
-            if (id == null)
+            if (zdarzenia == null)
             {
                 Response.StatusCode = 404;
                 return View("Error");
             }
 
-            ZdarzenieVM zdarzenieVM = new ZdarzenieVM()
+            ZdarzenieDetailsVM zdarzenieVM = new ZdarzenieDetailsVM()
             {
-                Id = id,
-                Name                = zdarzenia.Name,
-                Opis                = zdarzenia.Opis,
-                Naprawa             = zdarzenia.Naprawa,
-                DataZdarzenia       = zdarzenia.DataZdarzenia,
-                DataWykonania       = zdarzenia.DataWykonania,
-                OsobaOdpowiedzialna = zdarzenia.OsobaOdpowiedzialna,
+                Zdarzenia = zdarzenia,
+                //Id                  = id,
+                //Name                = zdarzenia.Name,
+                //Opis                = zdarzenia.Opis,
+                //Naprawa             = zdarzenia.Naprawa,
+                //DataZdarzenia       = zdarzenia.DataZdarzenia,
+                //DataWykonania       = zdarzenia.DataWykonania,
+                //OsobaOdpowiedzialna = zdarzenia.OsobaOdpowiedzialna,
+                //IdStatus            =zdarzenia.CurentStatusId,
             };
                 return View(zdarzenieVM);
         }
@@ -55,6 +60,7 @@ namespace KPI_vol2.Controllers
         // GET: Zdarzenias/Create
         public IActionResult Create()
         {
+            ViewBag.Status = new SelectList(_status.StatusList(), "IdStatus", "NameStatus");
             return View();
         }
 
@@ -76,11 +82,14 @@ namespace KPI_vol2.Controllers
                     DataZdarzenia=DateTime.Now,
                     DataWykonania= zdarzeniaVM.DataWykonania,
                     OsobaOdpowiedzialna=zdarzeniaVM.OsobaOdpowiedzialna,
+                    CurentStatusId=zdarzeniaVM.IdStatus
+                   
                 };
 
                 _zdarzenia.AddZdarzenia(zdarzenie);
                 
-                return RedirectToAction("Details",new {id=zdarzenie.Id} );
+                //return RedirectToAction("Details",new {id=zdarzenie.Id} );
+                return RedirectToAction("Index" );
             }
             return View();
         }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using KPI_vol2.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace KPI_vol2.ViewModel
 {
@@ -14,5 +15,7 @@ namespace KPI_vol2.ViewModel
         [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime DataWykonania { get; set; }
         public string OsobaOdpowiedzialna { get; set; }
+        public int  IdStatus { get; set; }
+        public Status? Status { get; set; }
     }
 }

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Status>
+
+@{
+    ViewData["Title"] = "Nazwy statusów";
+}
+
+<h1>Lista nazw</h1>
+
+<p>
+    <a asp-action="Create">Dodaj</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Status
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameStatus)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdStatus">Edycja</a> |
+
+                    <a asp-action="Delete" asp-route-id="@item.IdStatus">Usuń</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

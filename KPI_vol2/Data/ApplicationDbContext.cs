@@ -13,8 +13,9 @@ namespace KPI_vol2.Data
         {
         }
 
-        public virtual DbSet <Uzytkownik> Uzytkowniks { get; set; }
-        public virtual DbSet <Zdarzenia> Zdarzenia { get; set; }
+        public  DbSet <Uzytkownik> Uzytkowniks { get; set; }
+        public  DbSet <Zdarzenia> Zdarzenia { get; set; }
+        public  DbSet <Status> Statuses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -24,6 +25,16 @@ namespace KPI_vol2.Data
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
+            builder.Entity<Status>()
+                .HasMany(s => s.Zdarzenias)
+                .WithOne(s => s.Status)
+                .HasForeignKey(s=>s.Id);
+
+            builder.Entity<Zdarzenia>()
+                .HasOne(s => s.Status)
+                .WithMany(z => z.Zdarzenias)
+                .HasForeignKey(c=>c.CurentStatusId);
+            //poodczas tworzenia relacji jeden do wielu  trzeba zdeklarować klucz obcy w tabeli rodzica!! 
         }
     }
 }

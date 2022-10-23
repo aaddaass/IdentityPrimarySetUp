@@ -24,9 +24,9 @@
             <th>
                 Osoba odpowiedzialna
             </th>
-           @* <th>
-                @Html.DisplayNameFor(model => model.OsobaOdpowiedzialna)   zmiana na status
-            </th>*@
+            <th>
+                Status zgłoszenia
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -45,9 +45,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.OsobaOdpowiedzialna)
             </td>
-                @* <th>
-            @Html.DisplayNameFor(model => model.OsobaOdpowiedzialna)   zmiana na status
-            </th>*@
+                 <td>
+            @Html.DisplayFor(model => item.Status.NameStatus)   
+            </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edycja</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |

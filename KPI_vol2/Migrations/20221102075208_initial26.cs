@@ -2,9 +2,9 @@
 
 #nullable disable
 
-namespace KPI_vol2.Data.Migrations
+namespace KPI_vol2.Migrations
 {
-    public partial class initial20 : Migration
+    public partial class initial26 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

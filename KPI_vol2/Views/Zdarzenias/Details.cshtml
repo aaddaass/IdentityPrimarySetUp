@@ -1,4 +1,4 @@
-﻿@model ZdarzenieVM
+﻿@model ZdarzenieDetailsVM
 
 @{
     ViewData["Title"] = "Szcegóły zdarzenia";
@@ -14,37 +14,44 @@
             Tytuł:
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Zdarzenia.Name)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Opis):
+            @Html.DisplayNameFor(model => model.Zdarzenia.Opis):
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Opis)
+            @Html.DisplayFor(model => model.Zdarzenia.Opis)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Naprawa):
+            @Html.DisplayNameFor(model => model.Zdarzenia.Naprawa):
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Naprawa)
+            @Html.DisplayFor(model => model.Zdarzenia.Naprawa)
         </dd>
         <dt class = "col-sm-2">
             Data zdarzenia
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataZdarzenia)
+            @Html.DisplayFor(model => model.Zdarzenia.DataZdarzenia)
         </dd>
         <dt class = "col-sm-2">
             Data wykonania
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataWykonania)
+            @Html.DisplayFor(model => model.Zdarzenia.DataWykonania)
         </dd>
         <dt class = "col-sm-2">
             Osoba odpowiedzialna
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OsobaOdpowiedzialna)
+            @Html.DisplayFor(model => model.Zdarzenia.OsobaOdpowiedzialna)
+        </dd>
+        <dt class="col-sm-2">
+            Status zgłoszenia
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Zdarzenia.Status.NameStatus)
+          
         </dd>
     </dl>
 </div>
