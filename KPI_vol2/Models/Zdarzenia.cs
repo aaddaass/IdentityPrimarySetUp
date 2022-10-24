@@ -15,5 +15,7 @@ namespace KPI_vol2.Models
         [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime DataWykonania { get; set; }
         public string OsobaOdpowiedzialna { get; set; }
+       // public int IdStatus { get; set; }
+        public virtual Status Status { get; set; }
     }
 }
