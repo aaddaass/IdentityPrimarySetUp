@@ -2,6 +2,7 @@ using KPI_vol2.Data;
 using KPI_vol2.Interface;
 using KPI_vol2.Models;
 using KPI_vol2.Repository;
+using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,7 @@ builder.Services.AddIdentity<AppUser,IdentityRole>(options => options.SignIn.Req
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddHealthChecks();
 builder.Services.AddRazorPages();
+builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
 
 //wstrzykiwanie zale¿noœci DI
 builder.Services.AddScoped<IUzytkownik, RepoUzytkownik>();
@@ -34,9 +36,9 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/Error");
     app.UseStatusCodePagesWithReExecute("/Error/{0}");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    //The default HSTS value is 30 days.You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

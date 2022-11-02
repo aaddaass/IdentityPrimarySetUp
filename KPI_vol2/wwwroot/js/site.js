@@ -24,3 +24,36 @@ function confirmDelete(uniqueId, isTrue) {
         $('#' + confirmDeleteSpan).hide();
     }
 }
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        
+        headerToolbar: {
+           
+           
+           
+        },
+        events: [] ,
+        selectable: true,
+        /*selectHelper: true,*/
+        select: function (start, end, allDays) {
+            $.get("/zdarzenias/create")
+        }
+
+           
+        
+    });
+
+    calendar.render();
+});
+
+
+
+
+
+
+     

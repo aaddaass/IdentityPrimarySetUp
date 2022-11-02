@@ -1,14 +1,16 @@
 ﻿using KPI_vol2.Models;
 using KPI_vol2.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Data;
 
 namespace KPI_vol2.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class AdministratorController : Controller
-
     {
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<AppUser> _userManager;

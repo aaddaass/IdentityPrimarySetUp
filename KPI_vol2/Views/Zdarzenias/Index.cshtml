@@ -1,10 +1,15 @@
 ﻿@model IEnumerable<KPI_vol2.Models.Zdarzenia>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
 
 @{
     ViewData["Title"] = "Zdarzenia";
 }
 
 <h1>Lista zdarzeń</h1>
+@*pokaż wszystkie zgłoszenia
+    osobno zgłoszenia kamishibay
+*@
 
 <p>
     <a asp-action="Create">Dodaj nowe zdarzenie</a>
@@ -49,11 +54,17 @@
             @Html.DisplayFor(model => item.Status.NameStatus)   
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edycja</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
+                @if(SignInManager.IsSignedIn(User)&& User.IsInRole("Admin"))
+                {
+                <a asp-action="Edit" asp-route-id="@item.Id">Edycja</a> 
                 <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+
+                }
+                <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> 
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+<a asp-controller="BHP" asp-action="Index"  class="btn btn-primary">Kalendarz</a>
