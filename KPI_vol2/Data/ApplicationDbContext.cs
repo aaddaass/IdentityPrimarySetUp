@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Build.Framework;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System.Reflection.Emit;
 
 namespace KPI_vol2.Data
@@ -35,6 +37,29 @@ namespace KPI_vol2.Data
                 .WithMany(z => z.Zdarzenias)
                 .HasForeignKey(c=>c.CurentStatusId);
             //poodczas tworzenia relacji jeden do wielu  trzeba zdeklarować klucz obcy w tabeli rodzica!! 
+        }
+
+        public class DateOnlyConverter : ValueConverter<DateOnly, DateTime>
+        {
+            public DateOnlyConverter() : base(
+                    dateOnly => dateOnly.ToDateTime(TimeOnly.MinValue),
+                    dateTime => DateOnly.FromDateTime(dateTime))
+            {
+            }
+        }
+        public class DateOnlyComparer : ValueComparer<DateOnly>
+        {
+            public DateOnlyComparer() : base(
+                (d1, d2) => d1.DayNumber == d2.DayNumber,
+                d => d.GetHashCode())
+            {
+            }
+        }
+        protected override void ConfigureConventions(ModelConfigurationBuilder builder)
+        {
+            builder.Properties<DateOnly>()
+                   .HaveConversion<DateOnlyConverter, DateOnlyComparer>()
+                   .HaveColumnType("date");
         }
     }
 }

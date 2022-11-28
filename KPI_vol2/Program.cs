@@ -20,7 +20,7 @@ builder.Services.AddIdentity<AppUser,IdentityRole>(options => options.SignIn.Req
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddHealthChecks();
 builder.Services.AddRazorPages();
-builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
+//builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
 
 //wstrzykiwanie zale¿noœci DI
 builder.Services.AddScoped<IUzytkownik, RepoUzytkownik>();

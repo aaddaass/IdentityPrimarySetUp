@@ -11,6 +11,7 @@ using KPI_vol2.Interface;
 using KPI_vol2.ViewModel;
 using System.Xml.Linq;
 using System.Net.NetworkInformation;
+using System.Globalization;
 
 namespace KPI_vol2.Controllers
 {
@@ -19,10 +20,13 @@ namespace KPI_vol2.Controllers
         private readonly IZdarzenia _zdarzenia;
         private readonly IStatus _status;
 
-        public ZdarzeniasController(IZdarzenia zdarzenia, IStatus status)
+        private readonly ApplicationDbContext _context;
+
+        public ZdarzeniasController(IZdarzenia zdarzenia, IStatus status, ApplicationDbContext context)
         {
             _zdarzenia = zdarzenia;
             _status = status;
+            _context = context;
         }
 
         // GET: Zdarzenias
@@ -71,6 +75,8 @@ namespace KPI_vol2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ZdarzenieVM zdarzeniaVM)
         {
+            var dataUtworzenia = DateOnly.FromDateTime(DateTime.Now);
+
             if (ModelState.IsValid)
             {
                 Zdarzenia zdarzenie = new Zdarzenia
@@ -163,5 +169,19 @@ namespace KPI_vol2.Controllers
         //{
         //  return _context.Zdarzenia.Any(e => e.Id == id);
         //}
+        public ActionResult GetEvents()
+        {
+            return Json(_context.Zdarzenia.Select(e => new
+            {
+                //id = e.Id,
+                title = e.Name,
+                
+                start = e.DataZdarzenia.ToString("yyyy-MM-dd"),
+                end = e.DataZdarzenia.ToString("yyyy-MM-dd"),
+            }).ToList());
+        }
+
+      
+       
     }
 }

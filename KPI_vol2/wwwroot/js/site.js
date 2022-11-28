@@ -38,16 +38,31 @@ document.addEventListener('DOMContentLoaded', function () {
            
         },
         events: [] ,
+           /* $.getJSON('https://localhost:7210/Zdarzenias/EventsJson',),*/
+       
         selectable: true,
-        /*selectHelper: true,*/
-        select: function (start, end, allDays) {
-            $.get("/zdarzenias/create")
-        }
+        selectHelper: true,
+        //select: function (start, end, allDays) {
+        //    $.get("/zdarzenias/create")
+        //},
+        
+        selectHelper: true,
+        edittable: true,
+        eventLimit: true,
+        //eventSource: [
+        //    {
+        //        url: '/Zdarzenias/EventsJson',
+        //        color: 'yellow',
+        //        textColor:'black'
+        //    }]
+       
+        
 
            
         
     });
-
+     calendar.FullCalendar('addEventSource', '/zdarzenias/EventsJson');
+    calendar.getEvents('https://localhost:7210/Zdarzenias/EventsJson');
     calendar.render();
 });
 

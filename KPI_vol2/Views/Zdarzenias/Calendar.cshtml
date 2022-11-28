@@ -1,0 +1,47 @@
+﻿@model IEnumerable<KPI_vol2.Models.Zdarzenia>
+
+
+@{
+    var events = ViewData["events"];
+    //var length = events.Count();
+}
+
+@foreach(var item in Model)
+{
+    @Html.DisplayFor(modelitem=>item.Name)
+}
+
+<div id='calendar'></div>
+
+<script type="text/javascript">
+
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+
+            headerToolbar: {
+
+
+
+            },
+            events: 'https://localhost:7210/Zdarzenias/EventsJson',
+            //$.getJSON('https://localhost:7210/Zdarzenias/EventsJson',),
+
+            selectable: true,
+            /*selectHelper: true,*/
+            //select: function (start, end, allDays) {
+            //    $.get("/zdarzenias/create")
+            //}
+
+
+
+
+        });
+        /* calendar.FullCalendar('addEventSource', '/zdarzenias/EventsJson');*/
+        calendar.render();
+    });
+</script>
