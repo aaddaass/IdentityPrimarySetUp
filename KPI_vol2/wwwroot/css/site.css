@@ -16,3 +16,8 @@ html {
 body {
   margin-bottom: 60px;
 }
+.AxitoColor {
+    background-color: #0070b8;
+    color:white;
+    font-weight:bold;
+}

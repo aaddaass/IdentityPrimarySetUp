@@ -31,6 +31,7 @@ namespace KPI_vol2.Repository
         {
             var zdarzenia = _db.Zdarzenia
                             .Include(s => s.Status)
+                            
                             //.OrderByDescending(d=>d.DataZdarzenia)
                             .FirstOrDefault(i=>i.Id==id);
             return zdarzenia;
@@ -40,6 +41,7 @@ namespace KPI_vol2.Repository
         {
             var zdarzenia = _db.Zdarzenia
                             .Include(s => s.Status)
+                            .Where(n => n.Name != null)
                             .OrderByDescending(d=>d.DataZdarzenia)
                             .AsNoTracking();
 
