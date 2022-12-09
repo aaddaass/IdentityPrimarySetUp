@@ -95,7 +95,7 @@ namespace KPI_vol2.Controllers
                 _zdarzenia.AddZdarzenia(zdarzenie);
                 
                 //return RedirectToAction("Details",new {id=zdarzenie.Id} );
-                return RedirectToAction("Index" );
+                return RedirectToAction("Calendar");
             }
             return View();
         }
@@ -171,17 +171,84 @@ namespace KPI_vol2.Controllers
         //}
         public ActionResult GetEvents()
         {
-            return Json(_context.Zdarzenia.Select(e => new
+
+           
+            if(_context.Zdarzenia.Any(t=>t.Name==null))
+                {
+                return Json(
+
+                 //zdarzenia.Select(
+                 _context.Zdarzenia.Select(
+
+                      e => new
+                      {
+
+
+                          //id = e.Id,
+                          //title = e.Name,
+
+                          start = e.DataZdarzenia.ToString("yyyy-MM-dd"),
+                          //end = e.DataZdarzenia.ToString("yyyy-MM-dd"),
+                          setAllDay = true,
+                          backgroundColor = "red",
+                      }).ToList());
+            }
+            else
             {
-                //id = e.Id,
-                title = e.Name,
-                
-                start = e.DataZdarzenia.ToString("yyyy-MM-dd"),
-                end = e.DataZdarzenia.ToString("yyyy-MM-dd"),
-            }).ToList());
+                return Json(
+
+                 //zdarzenia.Select(
+                 _context.Zdarzenia.Select(
+
+                      e => new
+                      {
+
+
+                          //id = e.Id,
+                          //title = e.Name,
+
+                          start = e.DataZdarzenia.ToString("yyyy-MM-dd"),
+                          //end = e.DataZdarzenia.ToString("yyyy-MM-dd"),
+                          setAllDay = true,
+                          backgroundColor = "green",
+                      }).ToList());
+            }
+
+           
+            
+           
+        }
+
+        public ActionResult Calendar()
+        {
+            var zdarzenia = _zdarzenia.GetAllZdarzenia();
+
+            var year=DateTime.Now.Year;
+            var month = DateTime.Now.Month;
+            var day = DateTime.Now.Day;
+
+            var currentCulture = CultureInfo.CurrentCulture;
+            var weekNo = currentCulture.Calendar.GetWeekOfYear(
+                            new DateTime(year,month,day),
+                            currentCulture.DateTimeFormat.CalendarWeekRule,
+                            currentCulture.DateTimeFormat.FirstDayOfWeek);
+
+
+            var week=DateTime.Now.DayOfYear;
+
+            var numweek = week / 6;
+            ViewBag.act_week =weekNo ;
+            ViewBag.I_next_week=weekNo+1 ;
+            ViewBag.II_next_week=weekNo+2 ;
+            ViewBag.III_next_week=weekNo+3 ;
+            ViewBag.IV_next_week=weekNo+4 ;
+
+            return View(zdarzenia);
         }
 
       
+
+
        
     }
 }

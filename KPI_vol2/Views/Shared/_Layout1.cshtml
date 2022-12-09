@@ -14,8 +14,6 @@
 
     <link href="~/calendar/main.css" rel="stylesheet" />
     <script src="~/calendar/main.js"></script>
-    <script src="~/calendar/locales-all.js"></script>
-    
 
     @* <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/19.4.52/fluent.css" />*@
     <script src="https://cdn.syncfusion.com/ej2/19.4.52/dist/ej2.min.js"></script>
@@ -44,7 +42,6 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" asp-action="ListRoles" asp-controller="Administrator">Uprawnienia</a></li>
                                     <li><a class="dropdown-item" asp-action="ListOfUsers" asp-controller="Administrator">Użytkownicy</a></li>
-                                    <li><a class="dropdown-item" asp-action="DictionaryTables" asp-controller="Home">Tabele słownikowe</a></li>
 
                                 </ul>
                             </li>
@@ -58,7 +55,7 @@
             </div>
         </nav>
     </header>
-    <div class="container ">
+    <div >
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

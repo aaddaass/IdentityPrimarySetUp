@@ -4,12 +4,13 @@
 
 @{
     ViewData["Title"] = "Zdarzenia";
+    Layout = "~/views/shared/_layout1.cshtml";
 }
 
 <h1>Lista zdarzeń</h1>
 @*pokaż wszystkie zgłoszenia
-    osobno zgłoszenia kamishibay
-*@
+    osobno zgłoszenia kamishibay*@
+
 
 <p>
     <a asp-action="Create">Dodaj nowe zdarzenie</a>
@@ -74,7 +75,9 @@
 @*<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Launch demo modal
 </button>*@
-
+@{
+   
+}
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -84,11 +87,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Tutaj będzie można dodawać zgłoszenia.<br />
+                Czy doszło do zadarzenia, które chcesz umieścić w raporcie BHP? <br />
                 Work in progress...
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <div class="modal-footer m-auto">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" a asp-action="Create">Tak</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Nie</button>
                 @*<button type="button" class="btn btn-primary">Save changes</button>*@
             </div>
         </div>
@@ -96,24 +100,37 @@
 </div>
 
 
-<div id='calendar'></div>
+<div id='calendar' class="m-3"></div>
 
 <script type="text/javascript">
 
-    
+   
    
 
   document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
         
        var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
+            initialView: 'timeGridFourDay',
+            
+            locale:'pl',
+            defaultDate: new Date(),
 
-            headerToolbar: {center: 'dayGridMonth,timeGridFourDay'
+            //headerToolbar: {center: 'dayGridMonth,timeGridFourDay',
+                
 
 
 
+            //},
+            titleFormat: { year: 'numeric', month: 'long', day: 'numeric' },
+            //dayHeaderContent: (args) => {
+            //    return moment(args.date).format('dddd')
+            //},
+
+            dayHeaderFormat:{
+                 month: 'numeric', day: 'numeric', omitCommas: true
             },
+          
         //events: 'http://kpi.pl.uhlmann-net.de/Zdarzenias/getevents',
             events: 'https://localhost:7210/Zdarzenias/GetEvents',
             eventColor: '#f54425',
@@ -128,12 +145,31 @@
 
           views: {
                 timeGridFourDay: {
-                    type: 'dayGridWeek',
-                    duration: { days: 30 },
-                    buttonText: '4 day'
+                    type: 'dayGrid',
+                    //duration: { days: 30 },
+                    buttonText: 'Tydzień',
+                    dayCount:30,
+                    contentHeight: 75,
+                  
+                },
+                dayGridMonth:
+                {
+                    buttonText: 'Miesiąc'
                 }
+                        
+                 
+
+               
             },
-            heigh:150,
+          
+            
+
+   
+            //hiddenDays: [],
+            //dayRenderInfo.el:
+           
+           
+            
             
            
         

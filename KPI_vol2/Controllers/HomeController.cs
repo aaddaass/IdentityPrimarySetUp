@@ -32,5 +32,9 @@ namespace KPI_vol2.Controllers
             return View();
             //return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        public IActionResult DictionaryTables() // kontroler odnoszący się do widoku tabel słownikowych z opisem
+        {
+            return View();  
+        }
     }
 }

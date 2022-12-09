@@ -26,6 +26,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddScoped<IUzytkownik, RepoUzytkownik>();
 builder.Services.AddScoped<IZdarzenia, RepoZdarzenia>();
 builder.Services.AddScoped<IStatus, RepoStatus>();
+builder.Services.AddScoped<IDepartaments, RepoDepartments>();
 
 var app = builder.Build();
 
