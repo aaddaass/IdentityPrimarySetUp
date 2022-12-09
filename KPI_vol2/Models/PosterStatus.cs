@@ -1,6 +1,6 @@
 ﻿namespace KPI_vol2.Models
 {
-    public class Statuses
+    public class PosterStatus
     {
         /*
          * Nowe
@@ -11,5 +11,7 @@
          */
         public int Id { get; set; }
         public string? Name { get; set; }
+        public ICollection <Tasks>? PostedTasks { get; set; }
+
     }
 }

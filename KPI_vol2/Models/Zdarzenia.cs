@@ -14,7 +14,7 @@ namespace KPI_vol2.Models
         public DateTime DataZdarzenia { get; set; }
         [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime DataWykonania { get; set; }
-        public string OsobaOdpowiedzialna { get; set; }
+        public AppUser OsobaOdpowiedzialna { get; set; }
         public int CurentStatusId { get; set; }
         public  Status? Status { get;set; }
     }
