@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KPI_vol2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221101060543_initial1")]
-    partial class initial1
+    [Migration("20221209111536_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -89,6 +89,115 @@ namespace KPI_vol2.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("KPI_vol2.Models.AssignerStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AssignerStatus");
+                });
+
+            modelBuilder.Entity("KPI_vol2.Models.Categories", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("KPI_vol2.Models.Comments", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("AttachedToTaskId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CommentedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CommentedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AttachedToTaskId");
+
+                    b.HasIndex("CommentedById");
+
+                    b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("KPI_vol2.Models.Departments", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Departments");
+                });
+
+            modelBuilder.Entity("KPI_vol2.Models.PosterStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Statusess");
+                });
+
+            modelBuilder.Entity("KPI_vol2.Models.Priorities", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Priorities");
+                });
+
             modelBuilder.Entity("KPI_vol2.Models.Status", b =>
                 {
                     b.Property<int>("IdStatus")
@@ -104,6 +213,71 @@ namespace KPI_vol2.Migrations
                     b.HasKey("IdStatus");
 
                     b.ToTable("Statuses");
+                });
+
+            modelBuilder.Entity("KPI_vol2.Models.Tasks", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AssignedToId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ClosedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Deadline")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PostDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PosterId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("PriorityId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StatusByAssignedId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StatusByPosterId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Topic")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("WorkingAreaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AssignedToId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("PosterId");
+
+                    b.HasIndex("PriorityId");
+
+                    b.HasIndex("StatusByAssignedId");
+
+                    b.HasIndex("StatusByPosterId");
+
+                    b.HasIndex("WorkingAreaId");
+
+                    b.ToTable("Tasks");
                 });
 
             modelBuilder.Entity("KPI_vol2.Models.Uzytkownik", b =>
@@ -131,6 +305,22 @@ namespace KPI_vol2.Migrations
                     b.ToTable("Uzytkowniks");
                 });
 
+            modelBuilder.Entity("KPI_vol2.Models.WorkingAreas", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WorkingAreas");
+                });
+
             modelBuilder.Entity("KPI_vol2.Models.Zdarzenia", b =>
                 {
                     b.Property<int>("Id")
@@ -138,6 +328,9 @@ namespace KPI_vol2.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CurentStatusId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DataWykonania")
                         .HasColumnType("datetime2");
@@ -157,16 +350,15 @@ namespace KPI_vol2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OsobaOdpowiedzialna")
+                    b.Property<string>("OsobaOdpowiedzialnaId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("StatusIdStatus")
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StatusIdStatus");
+                    b.HasIndex("CurentStatusId");
+
+                    b.HasIndex("OsobaOdpowiedzialnaId");
 
                     b.ToTable("Zdarzenia");
                 });
@@ -304,12 +496,95 @@ namespace KPI_vol2.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("KPI_vol2.Models.Comments", b =>
+                {
+                    b.HasOne("KPI_vol2.Models.Tasks", "AttachedToTask")
+                        .WithMany("Comments")
+                        .HasForeignKey("AttachedToTaskId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("KPI_vol2.Models.AppUser", "CommentedBy")
+                        .WithMany("Comments")
+                        .HasForeignKey("CommentedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("AttachedToTask");
+
+                    b.Navigation("CommentedBy");
+                });
+
+            modelBuilder.Entity("KPI_vol2.Models.Tasks", b =>
+                {
+                    b.HasOne("KPI_vol2.Models.AppUser", "AssignedTo")
+                        .WithMany("AssignedTasks")
+                        .HasForeignKey("AssignedToId");
+
+                    b.HasOne("KPI_vol2.Models.Categories", "Category")
+                        .WithMany("Tasks")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("KPI_vol2.Models.Departments", "Department")
+                        .WithMany("Tasks")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("KPI_vol2.Models.AppUser", "PostedBy")
+                        .WithMany("PostedTasks")
+                        .HasForeignKey("PosterId");
+
+                    b.HasOne("KPI_vol2.Models.Priorities", "Priority")
+                        .WithMany("Tasks")
+                        .HasForeignKey("PriorityId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("KPI_vol2.Models.AssignerStatus", "StatusByAssigned")
+                        .WithMany("AssignedTasks")
+                        .HasForeignKey("StatusByAssignedId");
+
+                    b.HasOne("KPI_vol2.Models.PosterStatus", "StatusByPoster")
+                        .WithMany("PostedTasks")
+                        .HasForeignKey("StatusByPosterId");
+
+                    b.HasOne("KPI_vol2.Models.WorkingAreas", "WorkingArea")
+                        .WithMany("Tasks")
+                        .HasForeignKey("WorkingAreaId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("AssignedTo");
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Department");
+
+                    b.Navigation("PostedBy");
+
+                    b.Navigation("Priority");
+
+                    b.Navigation("StatusByAssigned");
+
+                    b.Navigation("StatusByPoster");
+
+                    b.Navigation("WorkingArea");
+                });
+
             modelBuilder.Entity("KPI_vol2.Models.Zdarzenia", b =>
                 {
-                    b.HasOne("KPI_vol2.Models.Status", null)
+                    b.HasOne("KPI_vol2.Models.Status", "Status")
                         .WithMany("Zdarzenias")
-                        .HasForeignKey("StatusIdStatus")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("CurentStatusId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("KPI_vol2.Models.AppUser", "OsobaOdpowiedzialna")
+                        .WithMany()
+                        .HasForeignKey("OsobaOdpowiedzialnaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("OsobaOdpowiedzialna");
+
+                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -363,9 +638,53 @@ namespace KPI_vol2.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("KPI_vol2.Models.AppUser", b =>
+                {
+                    b.Navigation("AssignedTasks");
+
+                    b.Navigation("Comments");
+
+                    b.Navigation("PostedTasks");
+                });
+
+            modelBuilder.Entity("KPI_vol2.Models.AssignerStatus", b =>
+                {
+                    b.Navigation("AssignedTasks");
+                });
+
+            modelBuilder.Entity("KPI_vol2.Models.Categories", b =>
+                {
+                    b.Navigation("Tasks");
+                });
+
+            modelBuilder.Entity("KPI_vol2.Models.Departments", b =>
+                {
+                    b.Navigation("Tasks");
+                });
+
+            modelBuilder.Entity("KPI_vol2.Models.PosterStatus", b =>
+                {
+                    b.Navigation("PostedTasks");
+                });
+
+            modelBuilder.Entity("KPI_vol2.Models.Priorities", b =>
+                {
+                    b.Navigation("Tasks");
+                });
+
             modelBuilder.Entity("KPI_vol2.Models.Status", b =>
                 {
                     b.Navigation("Zdarzenias");
+                });
+
+            modelBuilder.Entity("KPI_vol2.Models.Tasks", b =>
+                {
+                    b.Navigation("Comments");
+                });
+
+            modelBuilder.Entity("KPI_vol2.Models.WorkingAreas", b =>
+                {
+                    b.Navigation("Tasks");
                 });
 #pragma warning restore 612, 618
         }
