@@ -9,5 +9,6 @@ namespace KPI_vol2.Interface
         Categories AddCategories(Categories categories);
         Categories UpdateCategories(Categories categories);
         void DeleteCategories(int id);
+        List<Categories> CategoriesList();
     }
 }

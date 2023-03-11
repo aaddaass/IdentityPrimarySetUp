@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using KPI_vol2.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace KPI_vol2.ViewModel
 {
@@ -19,9 +20,12 @@ namespace KPI_vol2.ViewModel
         [EmailAddress]
         public string Email { get; set; }
 
-        public string City { get; set; }
+        //public string City { get; set; }
+        public string? Imie { get; set; }
+        public string? Nazwisko { get; set; }
+        public int DepatmentID { get; set; }
+        public Departments? Departments { get; set; }
 
-        
 
         public IList<string> Roles { get; set; }
     }

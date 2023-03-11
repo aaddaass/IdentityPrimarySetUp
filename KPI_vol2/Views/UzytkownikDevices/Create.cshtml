@@ -1,0 +1,44 @@
+﻿@model UzyDevVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>UzytkownikDevice</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Pracownik przypisany</label>
+                <select class="form-control" id="exampleFormControlSelect1" asp-for="UzytkownikID" asp-items="@ViewBag.uzytkownik">
+                    <option value=" test">--Pracownik--</option>
+                </select>
+
+                <span asp-validation-for="UzytkownikID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Urządzenie</label>
+                <select class="form-control" id="exampleFormControlSelect1" asp-for="DeviceID" asp-items="@ViewBag.device">
+                    <option value=" test">--Pracownik--</option>
+                </select>
+
+                <span asp-validation-for="DeviceID" class="text-danger"></span>
+
+                    <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

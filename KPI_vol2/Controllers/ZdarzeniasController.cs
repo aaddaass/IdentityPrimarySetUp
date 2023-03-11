@@ -171,7 +171,7 @@ namespace KPI_vol2.Controllers
         //}
         public ActionResult GetEvents()
         {
-
+            var dzienPierwszy = _zdarzenia.PierwszeZdarzenie;
            
             if(_context.Zdarzenia.Any(t=>t.Name==null))
                 {

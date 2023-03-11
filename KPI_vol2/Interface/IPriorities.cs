@@ -9,5 +9,6 @@ namespace KPI_vol2.Interface
         Priorities AddPriorities(Priorities  priorities);
         Priorities UpdatePriorities(Priorities priorities);
         void DeletePriorities(int id);
+        List<Priorities> PrioritiesList();
     }
 }

@@ -96,7 +96,7 @@ pokaż wszystkie zgłoszenia
             </div>
             <div class="modal-footer m-auto">
                  
-                <a  class="btn btn-secondary"  asp-controller="Zdarzenias" asp-action="Create">Tak</a>
+                <a  class="btn btn-secondary"  asp-controller="Comments" asp-action="Create">Tak</a>
                 @*<a class="btn btn-secondary" asp-controller="Zdarzenias" asp-action="NoEvent" formmethod>Nie</a>*@
                 @*<a id="Button" type="submit" name="submit" formmethod="post" class="btn btn-secondary btn-sm" asp-controller="Zdarzenias" asp-action="NoEvent">Nie</a>*@
                 @*<button type="button" class="btn btn-primary">Save changes</button>*@
@@ -195,8 +195,8 @@ pokaż wszystkie zgłoszenia
                 month: 'numeric', day: 'numeric', omitCommas: true
             },
 
-            events: 'http://kpi.pl.uhlmann-net.de/Zdarzenias/getevents',
-            //events: 'https://localhost:7210/Zdarzenias/GetEvents',
+            //events: 'http://kpi.pl.uhlmann-net.de/Zdarzenias/getevents',
+            events: 'https://localhost:7210/Zdarzenias/GetEvents',
             //eventColor: '#f54425',
             selectable: true,
             selectHelper: true,

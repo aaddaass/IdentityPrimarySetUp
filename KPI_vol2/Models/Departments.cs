@@ -1,4 +1,5 @@
-﻿namespace KPI_vol2.Models
+﻿using System.ComponentModel.DataAnnotations;
+namespace KPI_vol2.Models
 {
     public class Departments
     {   
@@ -21,7 +22,9 @@
          */
         public int Id { get; set; }
         public string? Name { get; set; }
-        public ICollection<Tasks>? Tasks { get; set; }
+        public ICollection<Zgloszenie>? Tasks { get; set; }
+        public ICollection<Uzytkownik>? User { get; set; }
+        public ICollection<AppUser>? UserApp { get; set; }
 
     }
 }

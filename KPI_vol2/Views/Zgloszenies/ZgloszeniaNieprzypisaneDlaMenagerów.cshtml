@@ -1,0 +1,124 @@
+﻿@model IEnumerable<KPI_vol2.Models.Zgloszenie>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Zgłoszenia Kamishibay</h1>
+
+<p>
+    <a asp-controller="Comments" asp-action="Create">Dodaj</a>
+</p>
+<table class="table table-striped text-center">
+    <thead>
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.PostDate)*@
+                Data zgłoszenia
+            </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.PostedBy)
+            </th>*@
+            @*<th>
+            @Html.DisplayNameFor(model => model.Category)
+            </th>*@
+            <th>
+                @*@Html.DisplayNameFor(model => model.Topic)*@
+                Temat
+            </th>
+            @* <th>
+            @Html.DisplayNameFor(model => model.Department)
+            </th>*@
+            <th>
+                @* @Html.DisplayNameFor(model => model.AssignedTo)*@
+                Osoba przypisana
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Priority)*@
+                Priorytet
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Deadline)*@
+                Wykonanie do
+            </th>
+            @* <th>
+            @Html.DisplayNameFor(model => model.ClosedOn)
+            </th>*@
+            <th>
+                @*@Html.DisplayNameFor(model => model.WorkingArea)*@
+                Obszar
+            </th>
+            @* <th>
+            @Html.DisplayNameFor(model => model.StatusByAssigned)
+            </th>
+            <th>
+            @Html.DisplayNameFor(model => model.Status)
+            </th>*@
+            <th>
+                Komentarze
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+            if ( User.IsInRole("Menager") )
+            {
+                
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PostDate)
+                        </td>
+                        @*<td>
+            @Html.DisplayFor(modelItem => item.PostedBy.Email)
+            </td>*@
+                        @* <td>
+            @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Topic)
+                        </td>
+                        @*    <td>
+            @Html.DisplayFor(modelItem => item.Department.Name)
+            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AssignedTo.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Priority.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Deadline)
+                        </td>
+                        @*  <td>
+            @Html.DisplayFor(modelItem => item.ClosedOn)
+            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WorkingArea.Name)
+                        </td>
+                        @* <td>
+            @Html.DisplayFor(modelItem => item.StatusByAssigned.NameStatus)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.Status.NameStatus)
+            </td>*@
+                        <td>
+                            @foreach (var com in item.Comments)
+                            {
+                                @Html.DisplayFor(modelItem=> com.CommentedOn)
+                                @Html.DisplayFor(modelItem=> com.CommentedBy)
+                            }
+                        </td>
+                        <td>
+                            @*  <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |*@
+                            <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a>
+                            @* <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                        </td>
+                    </tr>
+                
+            }
+    </tbody>
+</table>

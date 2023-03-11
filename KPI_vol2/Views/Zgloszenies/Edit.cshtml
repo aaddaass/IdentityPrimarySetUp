@@ -1,0 +1,89 @@
+﻿@model ZgloszenieVM
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Zgloszenie</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="PostDate" class="control-label">Data dodania wpisu</label>
+                <input asp-for="PostDate" class="form-control" />
+                <span asp-validation-for="PostDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserID" class="control-label">Autor</label>
+                <select asp-for="UserID" class="form-control" asp-items="@ViewBag.User"></select>
+                <span asp-validation-for="UserID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label">Kategoria</label>
+                <select asp-for="CategoryId" class="form-control" asp-items="@ViewBag.Category"></select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Topic" class="control-label">Temat</label>
+                <input asp-for="Topic" class="form-control" />
+                <span asp-validation-for="Topic" class="text-danger"></span>
+            </div>
+          @*  <div class="form-group">
+                <label asp-for="DepartmentId" class="control-label">Dział</label>
+                <select asp-for="DepartmentId" class="form-control" asp-items="@ViewBag.Department"></select>
+                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="AssignedToId" class="control-label">Osoba przypisana</label>
+                <select asp-for="AssignedToId" class="form-control" asp-items="@ViewBag.AssignetTo"></select>
+                <span asp-validation-for="AssignedToId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PriorityId" class="control-label">Priorytet</label>
+                <select asp-for="PriorityId" class="form-control" asp-items="@ViewBag.Priority"></select>
+                <span asp-validation-for="PriorityId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Deadline" class="control-label">Data ostateczna</label>
+                <input asp-for="Deadline" class="form-control" />
+                <span asp-validation-for="Deadline" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClosedOn" class="control-label">Data zamknięcia</label>
+                <input asp-for="ClosedOn" class="form-control" />
+                <span asp-validation-for="ClosedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WorkingAreaId" class="control-label">Obszar którego dotyczy zgłoszenie </label>
+                <select asp-for="WorkingAreaId" class="form-control" asp-items="@ViewBag.WorkingArea"></select>
+                <span asp-validation-for="WorkingAreaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StatusByAssigned_Id" class="control-label">Status zgłoszenia od osoby przypisanej</label>
+                <select asp-for="StatusByAssigned_Id" class="form-control" asp-items="@ViewBag.StatusByAssigned"></select>
+                <span asp-validation-for="StatusByAssigned_Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StatusByPoster_Id" class="control-label">Status zgłoszenia w/g autora</label>
+                <select asp-for="StatusByPoster_Id" class="form-control" asp-items="@ViewBag.StatusByPoster"></select>
+                <span asp-validation-for="StatusByPoster_Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

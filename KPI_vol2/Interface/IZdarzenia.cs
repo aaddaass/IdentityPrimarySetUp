@@ -8,6 +8,7 @@ namespace KPI_vol2.Interface
         IEnumerable<Zdarzenia> GetAllZdarzenia();
         Zdarzenia AddZdarzenia(Zdarzenia zdarzenia);
         Zdarzenia UpdateZdarzenia(Zdarzenia zdarzenia);
+        Zdarzenia PierwszeZdarzenie(Zdarzenia zdarzenia);
         void DeleteZdarzenia(int id);   
     }
 }

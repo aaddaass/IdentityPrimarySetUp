@@ -1,6 +1,7 @@
 ﻿using KPI_vol2.Data;
 using KPI_vol2.Interface;
 using KPI_vol2.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace KPI_vol2.Repository
 {
@@ -31,12 +32,26 @@ namespace KPI_vol2.Repository
 
         public IEnumerable<Uzytkownik> GetAll()
         {
-            return _context.Uzytkowniks;
+            var uzytkownik = _context.Uzytkowniks
+                            .Include(t => t.TelephonNo)
+                             .Include(d=>d.Departments)
+                             .Include(d=>d.uzytkownikDevices)
+                             .ThenInclude(d=>d.Device)
+                            .AsNoTracking();
+            return uzytkownik;
         }
 
         public Uzytkownik GetUzytkownik(int id)
         {
-            return _context.Uzytkowniks.Find(id);
+            var uzytkownik=_context.Uzytkowniks
+                            .Include(t=>t.TelephonNo)
+                            .Include(d=>d.uzytkownikDevices)
+                            
+                            .ThenInclude(d=>d.Device)
+                            //.ThenInclude(d=>d.DeviceType)
+                            .Include(d=>d.Departments)
+                            .FirstOrDefault(i=>i.Id==id);
+            return uzytkownik;
         }
 
         public Uzytkownik UpdateUzytkownik(Uzytkownik uzytkownik)
@@ -44,6 +59,12 @@ namespace KPI_vol2.Repository
             var pracownik = _context.Uzytkowniks.Attach(uzytkownik);
             pracownik.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _context.SaveChanges();
+            return uzytkownik;
+        }
+
+        public List<Uzytkownik> uzytkownikList()
+        {
+            var uzytkownik=(from Uzytkownik in _context.Uzytkowniks select Uzytkownik).ToList();
             return uzytkownik;
         }
     }

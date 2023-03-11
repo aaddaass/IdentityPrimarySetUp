@@ -9,5 +9,6 @@ namespace KPI_vol2.Interface
         WorkingAreas AddWorkingAreas(WorkingAreas  workingAreas);
         WorkingAreas UpdateWorkingAreas(WorkingAreas workingAreas);
         void DeleteWorkingAreas(int id);
+        List<WorkingAreas> WorkingAreasList();
     }
 }

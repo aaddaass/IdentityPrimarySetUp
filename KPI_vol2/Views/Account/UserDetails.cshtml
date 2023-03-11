@@ -1,0 +1,61 @@
+﻿@model AppUser
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+@{
+    ViewBag.Title = "Dane użytkownika";
+}
+
+<h3>Dane użytkownika:</h3>
+<br />
+<div class="col"><h3>@Html.DisplayFor(model => model.Email)</h3></div><a></a>
+<br />
+
+<a asp-controller="Account" asp-action="EditUser" asp-route-id="@Model.Id" class="btn btn-outline-success float-left mr-4">Edytuj dane</a>
+<form asp-action="DeleteUser" asp-controller="Account" method="post" asp-route-id="@Model.Id">
+
+    @* potwierdzenie usunięcia użytkownika *@
+    <span id="confirmDeleteSpan_@Model.Id" style="display:none">
+        <span>Czy na pewno chcesz usunąć użytkownika:</span>
+        <button type="submit" class="btn btn-outline-danger">Tak</button>
+        <a href="#" class="btn btn-outline-primary"
+           onclick="confirmDelete('@Model.Id', false)">Nie</a>
+    </span>
+
+    <span id="deleteSpan_@Model.Id">
+        <a href="#" class="btn btn-danger"
+           onclick="confirmDelete('@Model.Id', true)">Usuń</a>
+    </span>
+</form>
+<br />
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col">Email</div>
+            <div class="col">Imię</div>
+            <div class="col">Nazwisko</div>
+            <div class="col">Dział</div>
+
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col"><h5>@Html.DisplayFor(model => model.Email)</h5></div>
+            <div class="col"><h5>@Html.DisplayFor(model => model.Imie)</h5></div>
+            <div class="col"><h5> @Html.DisplayFor(model => model.Nazwisko)</h5></div>
+            <div class="col"><h5> @Model.Departments.Name</h5></div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@section Scripts {
+    <script src="~/js/CustomScript.js"></script>
+}
+

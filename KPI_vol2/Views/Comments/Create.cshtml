@@ -1,0 +1,137 @@
+﻿@model KPI_vol2.ViewModel.FirstCommentVM
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@*<h1>Dodaj zgłoszenie Kamishibay</h1>*@
+
+@*<h4>Comments</h4>*@
+<hr />
+@*<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
+           
+          
+            <div class="form-group">
+                <label asp-for="Comment" class="control-label">Komentarz</label>
+                <textarea asp-for="Comment" class="form-control" rows="5"></textarea>
+                
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label">Kategoria</label>
+                <select asp-for="CategoryId" class="form-control" asp-items="@ViewBag.Category"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Topic" class="control-label">Temat</label>
+                <input asp-for="Topic" class="form-control" />
+                <span asp-validation-for="Topic" class="text-danger"></span>
+            </div>*@
+          @*  <div class="form-group">
+                <label asp-for="DepartmentId" class="control-label">Dział</label>
+                <select asp-for="DepartmentId" class="form-control" asp-items="@ViewBag.Department"></select>
+            </div>*@
+            @*<div class="form-group">
+                <label asp-for="AssignedToId" class="control-label">Przypisać do</label>
+                <select asp-for="AssignedToId" class="form-control" asp-items="@ViewBag.AssignetTo"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PriorityId" class="control-label">Priorytet</label>
+                <select asp-for="PriorityId" class="form-control" asp-items="@ViewBag.Priority"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Deadline" class="control-label">Data absolutnego ukonczenia:</label>
+                <input asp-for="Deadline" class="form-control" />
+                <span asp-validation-for="Deadline" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClosedOn" class="control-label">Data zakończenia</label>
+                <input asp-for="ClosedOn" class="form-control" />
+                <span asp-validation-for="ClosedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WorkingAreaId" class="control-label">Obszar którego dotyczy</label>
+                <select asp-for="WorkingAreaId" class="form-control" asp-items=" @ViewBag.WorkingArea"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="StatusByAssigned_Id" class="control-label">Status(osoba zgłaszająca)</label>
+                <select asp-for="StatusByAssigned_Id" class="form-control" asp-items="@ViewBag.StatusByPoster "></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="StatusByPoster_Id" class="control-label">Status (osoba przypisana)</label>
+                <select asp-for="StatusByPoster_Id" class="form-control" asp-items="@ViewBag.StatusByAssigned"></select>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>*@
+
+
+
+
+
+
+
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class=" d-flex justify-content-center rounded-top rounded-3" style=" background-color:#03787c; color:white;width:100%;height:125px;">
+        <h2 class="mb-1 text-center mt-5" >Panel zgłoszeń Kamishibay</h2>
+    </div>
+    <br />
+    <br />
+    <div>
+        Cześć, @UserManager.GetUserAsync(User).Result.Imie. Gdy prześlesz ten formularz, właściciel zobaczy Twoje imię i nazwisko oraz adres e-mail.
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="WorkingAreaId" class="control-label">Obszar którego dotyczy</label>
+        <select asp-for="WorkingAreaId" class="form-control" asp-items=" @ViewBag.WorkingArea"></select>
+    </div>
+  <br />
+    <div class="form-group">
+        <label asp-for="CategoryId" class="control-label">Kategoria</label>
+        <select  asp-for=" CategoryId" class="form-control" asp-items="@ViewBag.Category"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Topic" class="control-label">Temat</label>
+        <input asp-for="Topic" class="form-control" />
+        <span asp-validation-for="Topic" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Comment" class="control-label">Propozycja rozwiązania<br />[opcjonalnie]</label>
+        <textarea asp-for="Comment" class="form-control" rows="5"></textarea>
+        @*<input asp-for="Comment" class="form-control" />*@
+        <span asp-validation-for="Comment" class="text-danger"></span>
+    </div>
+      <div class="form-group">
+    <label asp-for="DepartmentId" class="control-label">Dział</label>
+    <select asp-for="DepartmentId" class="form-control" asp-items="@ViewBag.Department"></select>
+    </div>
+  
+  <button type="submit" class="btn btn-primary">Dodaj</button>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}
+

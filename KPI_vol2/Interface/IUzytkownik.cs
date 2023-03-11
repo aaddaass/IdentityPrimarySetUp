@@ -10,5 +10,6 @@ namespace KPI_vol2.Interface
         Uzytkownik UpdateUzytkownik(Uzytkownik uzytkownik);
         Uzytkownik DeleteUzytkownik(int id);
         //void Save(Uzytkownik uzytkownik);
+        List<Uzytkownik> uzytkownikList();
     }
 }

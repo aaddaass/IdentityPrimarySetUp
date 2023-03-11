@@ -2,6 +2,7 @@
 using KPI_vol2.Interface;
 using KPI_vol2.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace KPI_vol2.Repository
 {
@@ -53,6 +54,14 @@ namespace KPI_vol2.Repository
             var zgloszenie = _db.Zdarzenia.Attach(zdarzenia);
             zgloszenie.State=Microsoft.EntityFrameworkCore.EntityState.Modified;
             _db.SaveChanges();
+            return zdarzenia;
+        }
+
+        public Zdarzenia PierwszeZdarzenie(Zdarzenia zdarzenia)
+        {
+           var zdarzenias = _db.Zdarzenia.Select(x=>x.DataZdarzenia).Max();
+
+                                    
             return zdarzenia;
         }
     }

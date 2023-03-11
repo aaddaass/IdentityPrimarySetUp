@@ -1,0 +1,80 @@
+﻿@model ZgloszenieVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Zgloszenie</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+          @*  <div class="form-group">
+                <label asp-for="PostDate" class="control-label"></label>
+                <input asp-for="PostDate" class="form-control" />
+                <span asp-validation-for="PostDate" class="text-danger"></span>
+            </div>*@
+            @*<div class="form-group">
+                <label asp-for="UserID" class="control-label"></label>
+                <select asp-for="UserID" class ="form-control" asp-items="ViewBag.UserID"></select>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label">Kategoria</label>
+                <select asp-for="CategoryId" class="form-control" asp-items="@ViewBag.Category"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Topic" class="control-label">Temat</label>
+                <input asp-for="Topic" class="form-control" />
+                <span asp-validation-for="Topic" class="text-danger"></span>
+            </div>
+           @* <div class="form-group">
+                <label asp-for="DepartmentId" class="control-label">Dział</label>
+                <select asp-for="DepartmentId" class="form-control" asp-items="@ViewBag.Department"></select>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="AssignedToId" class="control-label">Przypisać do</label>
+                <select asp-for="AssignedToId" class="form-control" asp-items="@ViewBag.AssignetTo"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PriorityId" class="control-label">Priorytet</label>
+                <select asp-for="PriorityId" class="form-control" asp-items="@ViewBag.Priority"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Deadline" class="control-label">Data absolutnego ukonczenia:</label>
+                <input asp-for="Deadline" class="form-control" />
+                <span asp-validation-for="Deadline" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClosedOn" class="control-label">Data zakończenia</label>
+                <input asp-for="ClosedOn" class="form-control" />
+                <span asp-validation-for="ClosedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WorkingAreaId" class="control-label"></label>
+                <select asp-for="WorkingAreaId" class="form-control" asp-items=" @ViewBag.WorkingArea"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="StatusByAssigned_Id" class="control-label"></label>
+                <select asp-for="StatusByAssigned_Id" class="form-control" asp-items="@ViewBag.StatusByPoster "></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="StatusByPoster_Id" class="control-label"></label>
+                <select asp-for="StatusByPoster_Id" class="form-control" asp-items="@ViewBag.StatusByAssigned"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<table class="table table-striped text-center">
+    <thead></thead>
+    <tbody>
+        <tr>
+            <th scope="row">Zgłoszenia Kamishibay</th>
+            <th>Przegląd wszystkich przypisanych  zgłoszeń Kamishibay</th>
+            <th><a asp-controller="zgloszenies" asp-action="ZgloszeniaComments">Przejdź do zgłoszeń Kamishibay</a></th>
+        </tr>
+        <tr>
+            <th scope="row">Zgłoszenia Kamishibay</th>
+            <th>Przegląd wszystkich nieprzypisanych zgłoszeń Kamishibay</th>
+            <th><a asp-controller="zgloszenies" asp-action="ZgloszeniaNieprzypisane">Przejdź do zgłoszeń Kamishibay</a></th>
+        </tr>
+        <tr>
+            <th scope="row">Zgłoszenia Kamishibay</th>
+            <th>Przegląd wszystkich nieprzypisanych zgłoszeń Kamishibay dla menadzerów działu</th>
+            <th><a asp-controller="zgloszenies" asp-action="ZgloszeniaNieprzypisaneDlaMenagerów">Przejdź do zgłoszeń Kamishibay</a></th>
+        </tr>
+        <tr>
+            <th scope="row">Moje zgłoszenia Kamishibay</th>
+            <th>Zgłoszenia utwozone przez uzytkownika</th>
+            <th><a asp-controller="Account" asp-action="ZgloszeniaUzytkownika">Przejdź do zgłoszeń Kamishibay</a></th>
+        </tr>
+        <tr>
+            <th scope="row">Moje przypisane zgłoszenia Kamishibay</th>
+            <th>Zgłoszenia przypisane dla uzytkownika</th>
+            <th><a asp-controller="Account" asp-action="ZgloszeniaPrzypisane">Przejdź do zgłoszeń Kamishibay</a></th>
+        </tr>
+      
+
+       
+    </tbody>
+</table>

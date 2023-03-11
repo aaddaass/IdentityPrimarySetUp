@@ -12,9 +12,12 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
+
+//builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+//    .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddIdentity<AppUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
@@ -22,11 +25,24 @@ builder.Services.AddHealthChecks();
 builder.Services.AddRazorPages();
 //builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
 
-//wstrzykiwanie zale¿noœci DI
+//wstrzykiwanie zaleï¿½noï¿½ci DI
 builder.Services.AddScoped<IUzytkownik, RepoUzytkownik>();
 builder.Services.AddScoped<IZdarzenia, RepoZdarzenia>();
 builder.Services.AddScoped<IStatus, RepoStatus>();
+
 builder.Services.AddScoped<IDepartaments, RepoDepartments>();
+builder.Services.AddScoped<ICategories, RepoCategories>();
+builder.Services.AddScoped<IPriorities, RepoPriorities>();
+builder.Services.AddScoped<IWorkingAreas, RepoWorkingAreas>();
+//builder.Services.AddScoped<IAssignerStatus, RepoAssignerStatus>();
+
+builder.Services.AddScoped<IUzytkownik, RepoUzytkownik>();
+builder.Services.AddScoped<IDevice, RepoDevice>();
+builder.Services.AddScoped<IDeviceType, RepoDeviceType>();
+builder.Services.AddScoped<ITelephone, RepoTelephonNo>();
+builder.Services.AddScoped<IUrzyt_Device, RepoUzytkownikDevice>();
+builder.Services.AddScoped<IZgloszenie, RepoZgloszenie>();
+builder.Services.AddScoped<IComments, RepoComments>();
 
 var app = builder.Build();
 

@@ -9,5 +9,6 @@ namespace KPI_vol2.Interface
         Departments AddDepartments(Departments  departments);
         Departments UpdateDepartments(Departments departments);
         void DeleteDepartments(int id);
+        List<Departments> DepartmentsList();
     }
 }
